@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blind Stick</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initializeMap" async defer></script>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <audio id="background-audio" loop>
+        <source src="ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <nav>
+        <img src="img.jpg" alt="">
+        <a href="#"><i class="fas fa-home"></i>Home</a>
+        <a href="#"><i class="fas fa-microscope"></i>Research</a>
+        <a href="#"><i class="fas fa-handshake"></i>Partners</a>
+        <a href="#"><i class="fas fa-question-circle"></i>Help</a>
+        <button id="theme-toggle" class="theme-btn">setting</button>
+    </nav>
+
+    <header>
+        <h1>Empowering Vision Through Technology</h1>
+        <p>Advanced health monitoring and assistance for visually impaired individuals,<br>
+            keeping them connected with their loved ones.</p>
+        <p id="time"></p>
+    </header>
+
+    <main>
+        <h2>Real-Time Health Monitoring</h2>
+        <div class="card-container">
+            <div class="card">
+                <button class="card-btn" onclick="openModal('heartbeat')">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Heartbeat</h3>
+                    <p id="heartbeat">74.6 BPM</p>
+                </button>
+            </div>
+            <div class="card">
+                <button class="card-btn" onclick="openModal('temperature')">
+                    <i class="fas fa-thermometer-half"></i>
+                    <h3>Temperature</h3>
+                    <p id="temperature">36.5°C</p>
+                </button>
+            </div>
+            <div class="card">
+                <button class="card-btn" id="location-button" onclick="redirectToLocation()">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p id="location-display">Lat: 24.611424, Lng: 73.700666</p>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="heartbeat-modal" class="modal">
+        <div class="modal-content heartbeat-theme">
+            <span class="close-btn" onclick="closeModal('heartbeat')">&times;</span>
+            <h2>Heartbeat Graph</h2>
+            <canvas id="heartbeat-chart"></canvas>
+        </div>
+    </div>
+
+    <div id="temperature-modal" class="modal">
+        <div class="modal-content temperature-theme">
+            <span class="close-btn" onclick="closeModal('temperature')">&times;</span>
+            <h2>Temperature Graph</h2>
+            <canvas id="temperature-chart"></canvas>
+        </div>
+    </div>
+
+    <div id="location-modal" class="modal">
+        <div class="modal-content location-theme">
+            <span class="close-btn" onclick="closeModal('location')">&times;</span>
+            <h2>Stick Tracking</h2>
+            <p id="stick-location">Stick Location: Fetching...</p>
+            <p id="user-location">Your Location: Fetching...</p>
+            <p id="distance">Distance: Calculating...</p>
+            <div id="map" style="height: 400px; width: 100%; border-radius: 10px; margin-top: 20px;"></div>
+        </div>
+    </div>
+    
+    
+
+    <footer>
+        &copy; 2024 Blind Lens. All rights reserved.
+    </footer>
+    <script src="main.js"></script>
+
+    <script>
+        // Update the time in the header
+        function updateTime() {
+            const now = new Date();
+            document.getElementById("time").textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        }
+        setInterval(updateTime, 1000);
+
+        // Redirect to location on Google Maps
+        function redirectToLocation() {
+            const latitude = 24.611424;
+            const longitude = 73.700666;
+            const locationName = "Udaipur, Rajasthan";
+
+            // Update button display
+            const locationDisplay = document.getElementById("location-display");
+            locationDisplay.textContent = `${locationName} (Latitude: ${latitude}, Longitude: ${longitude})`;
+
+            // Redirect to Google Maps
+            const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            window.open(url, "_blank");
+        }
+    </script>
+
+</body>
+</html>

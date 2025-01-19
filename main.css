@@ -1,0 +1,239 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  overflow-x: hidden;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;   
+  z-index: -1;
+  background: linear-gradient(135deg, #1e1e1e, #121212);
+}
+
+/* Compressed Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(20, 20, 20, 0.8);
+  padding: 5px 15px; /* Reduced padding */
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  height: 60px; /* Set a fixed height */
+}
+
+nav img {
+  width: 50px; /* Resized logo */
+  height: 50px;
+  border-radius: 5px; /* Subtle rounded corners */
+  margin-right: 15px; /* Space between logo and links */
+}
+
+nav a {
+  color: #e0e0e0;
+  text-decoration: none;
+  margin: 0 10px; /* Reduced margin between links */
+  font-size: 0.9rem; /* Slightly smaller font size */
+  display: flex;
+  align-items: center;
+  transition: color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+  color: #ff4081;
+  text-shadow: 0 0 10px #ff4081;
+}
+
+.theme-btn {
+  background: #ff4081;
+  border: none;
+  padding: 5px 10px; /* Smaller button size */
+  color: white;
+  font-size: 0.8rem; /* Reduced font size */
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.theme-btn:hover {
+  background: #e91e63;
+  transform: scale(1.1);
+}
+
+
+header {
+  text-align: center;
+  padding: 120px 20px;
+  color: white;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3.5rem;
+  color: #ff4081;
+  text-shadow: 0 0 20px #ff4081;
+}
+
+header p {
+  margin: 10px 0 0;
+  font-size: 1.5rem;
+  color: white;
+}
+
+main {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+main h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff4081;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 220px;
+  text-align: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  color: #ff4081;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(20, 20, 20, 0.9);
+  color: white;
+  font-size: 0.9rem;
+}
+
+.card-btn {
+  all: unset;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+}
+
+.card-btn:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.modal-content {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  animation: zoomIn 0.5s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.5rem;
+  color: #ff4081;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+body {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.heartbeat-theme .modal-content {
+  background-color: #ff4081;
+}
+
+.temperature-theme .modal-content {
+  background-color: #ff5722;
+}
+
+.location-theme .modal-content {
+  background-color: #3f51b5;
+}
+/* Location Modal Styling */
+.location-theme .modal-content {
+  background: #3f51b5;
+  color: white;
+  text-align: center;
+}
+
+
+#google-maps-link {
+  margin-top: 15px;
+  background: #ff5722;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#google-maps-link:hover {
+  background: #e64a19;
+}

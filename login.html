@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page with Particles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+       <style>
+        body, html { 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+    color: #e0e0e0;
+    overflow: hidden;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #1e1e1e, #121212);
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.form-control {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-control::placeholder {
+    color: #ddd;
+}
+
+.btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #00bcd4;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #008c9e;
+}
+
+.footer {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.footer a {
+    color: #ff5722;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.header {
+    text-align: center;
+    padding: 120px 20px;
+    color: white;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    color: #ff4081;
+    text-shadow: 0 0 20px #ff4081;
+}
+
+.header p {
+    margin: 10px 0 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+       </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form>
+            <input type="email" class="form-control" placeholder="Email" required>
+            <input type="password" class="form-control" placeholder="Password" required>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="footer">
+            Don't have an account? <a href="#">Sign up</a>
+        </div>
+    </div>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+       particlesJS('particles-js', {
+  particles: {
+      number: { value: 150, density: { enable: true, value_area: 1000 } },
+      color: { value: ["#00bcd4", "#ff5722", "#ffc107", "#4caf50"] },
+      shape: { type: ["circle", "polygon", "star"], polygon: { nb_sides: 5 } },
+      opacity: { value: 0.6, random: true },
+      size: { value: 5, random: true },
+      line_linked: { enable: true, distance: 120, color: "#ffffff", opacity: 0.4 },
+      move: { enable: true, speed: 1.5, direction: "none", random: true, out_mode: "out" }
+  },
+  interactivity: {
+      detect_on: "canvas",
+      events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+      },
+      modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 6 }
+      }
+  },
+  retina_detect: true
+});
+
+// Dynamic interaction with particles
+document.addEventListener('click', (event) => {
+  const canvas = document.querySelector('#particles-js canvas');
+  const boundingRect = canvas.getBoundingClientRect();
+  const clickX = event.clientX - boundingRect.left;
+  const clickY = event.clientY - boundingRect.top;
+
+  const particlesInstance = window.pJSDom[0].pJS;
+  particlesInstance.particles.array.forEach(particle => {
+      const dx = particle.x - clickX;
+      const dy = particle.y - clickY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 150) {
+          const angle = Math.atan2(dy, dx);
+          particle.vx = Math.cos(angle) * 2;
+          particle.vy = Math.sin(angle) * 2;
+      }
+  });
+  particlesInstance.fn.modes.pushParticles(10, { pos_x: clickX, pos_y: clickY });
+});
+
+    </script>
+</body>
+</html>
