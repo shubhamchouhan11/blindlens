@@ -44,10 +44,10 @@
                 </button>
             </div>
             <div class="card">
-                <button class="card-btn" onclick="openModal('temperature')">
-                    <i class="fas fa-thermometer-half"></i>
-                    <h3>Temperature</h3>
-                    <p id="temperature">36.5°C</p>
+                <button class="card-btn" onclick="openModal('oxygen')">
+                    <i class="fas fa-lungs"></i>
+                    <h3>Oxygen Level</h3>
+                    <p id="oxygen-level">98%</p>
                 </button>
             </div>
             <div class="card">
@@ -68,11 +68,11 @@
         </div>
     </div>
 
-    <div id="temperature-modal" class="modal">
-        <div class="modal-content temperature-theme">
-            <span class="close-btn" onclick="closeModal('temperature')">&times;</span>
-            <h2>Temperature Graph</h2>
-            <canvas id="temperature-chart"></canvas>
+    <div id="oxygen-modal" class="modal">
+        <div class="modal-content oxygen-theme">
+            <span class="close-btn" onclick="closeModal('oxygen')">&times;</span>
+            <h2>Oxygen Level Graph</h2>
+            <canvas id="oxygen-chart"></canvas>
         </div>
     </div>
 
@@ -86,8 +86,6 @@
             <div id="map" style="height: 400px; width: 100%; border-radius: 10px; margin-top: 20px;"></div>
         </div>
     </div>
-    
-    
 
     <footer>
         &copy; 2024 Blind Lens. All rights reserved.
@@ -116,6 +114,72 @@
             const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
             window.open(url, "_blank");
         }
+
+        // Modal control
+        function openModal(type) {
+            const modal = document.getElementById(`${type}-modal`);
+            modal.style.display = "flex";
+
+            const audio = new Audio('button-click.mp3');
+            audio.play();
+
+            if (type === 'heartbeat') {
+                renderHeartbeatChart();
+            } else if (type === 'oxygen') {
+                renderOxygenChart();
+            } else if (type === 'location') {
+                initializeMap();
+            }
+        }
+
+        function closeModal(type) {
+            const modal = document.getElementById(`${type}-modal`);
+            modal.style.display = "none";
+        }
+
+        // Render charts for Heartbeat and Oxygen Level
+        function renderHeartbeatChart() {
+            const ctx = document.getElementById('heartbeat-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: 10 }, (_, i) => `T-${10 - i}`),
+                    datasets: [{
+                        label: 'Heartbeat',
+                        data: Array.from({ length: 10 }, () => (Math.random() * 10 + 70).toFixed(1)),
+                        borderColor: '#ff4081',
+                        borderWidth: 2,
+                        fill: false,
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        function renderOxygenChart() {
+            const ctx = document.getElementById('oxygen-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: 10 }, (_, i) => `T-${10 - i}`),
+                    datasets: [{
+                        label: 'Oxygen Level',
+                        data: Array.from({ length: 10 }, () => (Math.random() * 2 + 96).toFixed(1)),
+                        borderColor: '#4caf50',
+                        borderWidth: 2,
+                        fill: false,
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        // Update the time in the header
+        function updateTime() {
+            const now = new Date();
+            document.getElementById("time").textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        }
+        setInterval(updateTime, 1000);
     </script>
 
 </body>
